@@ -1,0 +1,53 @@
+<p>Form without angular material:</p>
+<form [formGroup]="myform">
+  Usuario:
+  <input
+    type="text"
+    formControlName="username"
+    [class.is-invalid]="
+      myform.get('username').touched && myform.get('username').invalid
+    "
+  />
+  Password:
+  <input type="password" class="form-control" formControlName="password" />
+  <br />
+  <button type="submit" (click)="send()">Enviar</button>
+</form>
+<br />
+
+<p>Form with angular material</p>
+<form [formGroup]="formtwo">
+  <mat-card>
+    <mat-card-header> Profile Information </mat-card-header>
+    <mat-card-content>
+      <div>
+        <mat-form-field appearance="legacy">
+          <mat-label>First Name</mat-label>
+          <input matInput autocomplete="off" formControlName="firstName" />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="legacy">
+          <mat-label>Last Name</mat-label>
+          <input matInput autocomplete="off" formControlName="lastName" />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="legacy">
+          <mat-label>Address</mat-label>
+          <input matInput autocomplete="off" formControlName="address" />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="legacy">
+          <mat-label>Gender</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option value="First">First option</mat-option>
+            <mat-option value="Second">Second option</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <button mat-raised-button color="primary" (click)="sendTwo()">Send</button>
+  </mat-card>
+</form>

@@ -3,16 +3,30 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { StoreModule } from '@ngrx/store';
+import { customerReducer } from './customer/reducer/customer.reducer';
+import { TestPipeComponent } from './test-pipe/test-pipe.component';
+import { CustomerModule } from './customer/customer.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormModule } from './form/form.module';
+import { MaterialModule } from './material/material.module';
+
+//Important
+//Every module that u created, u need to put it inside imports in app.module
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent, TestPipeComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({ customer: customerReducer }),
+    CustomerModule,
+    BrowserAnimationsModule,
+    FormModule,
+    MaterialModule,
+    // DiegoModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
