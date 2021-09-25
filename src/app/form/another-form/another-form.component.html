@@ -1,0 +1,14 @@
+<div>
+  <p>This is the nested child</p>
+  <form [formGroup]="form">
+    <mat-form-field appearance="legacy">
+      <mat-label>Bank Name</mat-label>
+      <input
+        matInput
+        autocomplete="off"
+        placeholder="Enter a bank name"
+        formControlName="name"
+      />
+    </mat-form-field>
+  </form>
+</div>

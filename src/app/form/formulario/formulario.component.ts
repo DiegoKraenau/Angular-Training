@@ -20,11 +20,14 @@ export class FormularioComponent implements OnInit {
   });
 
   //2 - form
-  formtwo = this.formBuilder.group({
-    firstName: [''],
-    lastName: [''],
-    address: [''],
-    gender: [''],
+  formTwo = this.formBuilder.group({
+    firstName: ['', [Validators.required]],
+    lastName: ['', Validators.required],
+    address: ['', Validators.required],
+    gender: ['', Validators.required],
+    bankInformation: this.formBuilder.group({
+      name: ['', Validators.required],
+    }),
   });
 
   constructor(private formBuilder: FormBuilder) {}
@@ -32,10 +35,10 @@ export class FormularioComponent implements OnInit {
   ngOnInit(): void {}
 
   send() {
-    console.log('Values:', this.myform.value);
+    console.log('Values:', this.formTwo.value);
   }
 
   sendTwo() {
-    console.log('Values', this.formtwo.value);
+    console.log('Values', this.formTwo.value);
   }
 }
