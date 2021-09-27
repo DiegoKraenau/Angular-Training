@@ -1,0 +1,9 @@
+<p>movies-list works!</p>
+<form>
+  <input name="name" [(ngModel)]="newMovie.title" />
+  <button (click)="addNewMovie()">Save</button>
+</form>
+
+<p *ngFor="let movie of movies$ | async">
+  {{ movie.title }}
+</p>
