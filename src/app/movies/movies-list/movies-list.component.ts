@@ -1,9 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Movie } from '../../Models/Movie';
-import { getMovies, addMovies } from '../store/movies.actions';
+import {
+  getMovies,
+  addMovies,
+  addMoviesSuccess,
+} from '../store/movies.actions';
 import { MovieService } from '../../services/movies.service';
 import { MovieState } from '../store/movies.reducer';
+import { movieSelector } from '../store/movies.selector';
+import { map, take } from 'rxjs/operators';
+import { CustomerState } from '../../customer/reducer/customer.reducer';
 
 @Component({
   selector: 'app-movies-list',
@@ -11,26 +18,38 @@ import { MovieState } from '../store/movies.reducer';
   styleUrls: ['./movies-list.component.css'],
 })
 export class MoviesListComponent implements OnInit {
-  movies: Movie[] = [];
-  movies$ = this.store.select('movies');
+  movies: ReadonlyArray<Movie> = [];
+  // Get movies from MovieStore
+  // movies$ = this.store.pipe(
+  //   select('movies'),
+  //   map((state) => state.movies)
+  // );
+  //Get Movies from a selector
+  // movies$ = this.store.pipe(select(movieSelector));
+  //Get movie store and then map movies in ngOnInit
+  movieStore$ = this.store.select('movies');
   newMovie: Movie = new Movie();
 
-  constructor(
-    private store: Store<MovieState>,
-    private moviesService: MovieService
-  ) {}
+  constructor(private store: Store<any>, private moviesService: MovieService) {}
 
   ngOnInit(): void {
     this.generateAllMovies();
+    this.movieStore$.subscribe((res) => {
+      this.movies = res.movies;
+    });
   }
 
   generateAllMovies(): void {
     this.store.dispatch(getMovies());
-    // this.moviesService.getMovies().subscribe((res) => {
-    //   this.movies = res;
-    // });
+    // console.log(this.movies$);
+    this.moviesService.getMovies().subscribe((res) => {
+      this.movies = res;
+    });
   }
   addNewMovie(): void {
-    this.store.dispatch(addMovies(this.newMovie));
+    console.log(this.newMovie);
+    this.store.dispatch(addMoviesSuccess(this.newMovie));
+    this.newMovie = new Movie();
+    console.log(this.movies);
   }
 }

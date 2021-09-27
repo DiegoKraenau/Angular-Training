@@ -19,5 +19,18 @@ export class MovieEffects {
     )
   );
 
+  //   addMovie$ = createEffect(() =>
+  //   this.action$.pipe(
+  //     ofType(addMovies),
+  //     tap((movie) => console.log(movie)),
+  //     concatMap(({ movie }) =>
+  //       this.dataService.addMovies(movie).pipe(
+  //         map((newMovie) => addMoviesSuccess(newMovie)),
+  //         catchError(() => EmptyError)
+  //       )
+  //     )
+  //   )
+  // );
+
   constructor(private action$: Actions, private movieService: MovieService) {}
 }
