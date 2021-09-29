@@ -19,12 +19,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { MoviesModule } from './movies/movies.module';
 import { movieReducer } from './movies/store/movies.reducer';
 import { EffectsModule } from '@ngrx/effects';
+import { PruebaComponent } from './prueba/prueba.component';
 
 //Important
 //Every module that u created, u need to put it inside imports in app.module
 
 @NgModule({
-  declarations: [AppComponent, TestPipeComponent],
+  declarations: [AppComponent, TestPipeComponent, PruebaComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
